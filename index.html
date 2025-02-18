@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.0/dist/leaflet.css" />
+    <link rel="stylesheet" href="leaflet-search-master/leaflet-search-master/src/leaflet-search.css" />
+    <script src="https://unpkg.com/leaflet@1.3.0/dist/leaflet.js"></script>
+    <!--Enlaces para llamar librerias de buscador-->
+    <link rel="stylesheet" href="https://librekcesar.github.io/busca_zipcodes4/leaflet-search-master/leaflet-search-master/src/leaflet-search.css" />
+    <script src="https://librekcesar.github.io/busca_zipcodes4/leaflet-search-master/leaflet-search-master/src/leaflet-search.js"></script>
+
+    <!--Enlaces para github de buscador-->
+
+    <script src="https://unpkg.com/leaflet@1.3.0/dist/leaflet.js"></script>
+    <script src="https://librekcesar.github.io/busca_zipcodes4/leaflet-search-master/leaflet-search-master/src/leaflet-search.js"></script>
+
+
+    
+    <script type="text/javascript" src="cdmx_v82_actual.js"></script>
+    <script type="text/javascript" src="cdmx_v82_propuesta.js"></script>
+    <script type="text/javascript" src="proveedor_propuesto_QP.js"></script>
+    <script type="text/javascript" src="proveedor_propuesto_GREENPACK.js"></script>
+    <script type="text/javascript" src="proveedor_propuesto_MAEM.js"></script>
+    <script type="text/javascript" src="proveedor_propuesto_Cornejo.js"></script>
+    <script type="text/javascript" src="proveedor_propuesto_CRUZ.js"></script>
+    <script type="text/javascript" src="proveedor_propuesto_Yarto.js"></script>
+    <script type="text/javascript" src="proveedor_propuesto_GUTIERREZ.js"></script>
+    <script type="text/javascript" src="proveedor_propuesto_TYDSEY.js"></script>
+    <script type="text/javascript" src="proveedor_propuesto_99minutos.js"></script>
+    <script type="text/javascript" src="proveedor_propuesto_CAEY.js"></script>
+    <script type="text/javascript" src="proveedor_propuesto_GUIDO.js"></script>
+    <script type="text/javascript" src="proveedor_propuesto_MARQUEZ.js"></script>
+    <script type="text/javascript" src="proveedor_propuesto_JAMKA.js"></script>
+    <script type="text/javascript" src="proveedor_propuesto_RABIT.js"></script>
+    <script type="text/javascript" src="proveedor_propuesto_TERCAM.js"></script>
+    <script type="text/javascript" src="proveedor_propuesto_Delivery_Pro.js"></script>
+    
+
+    <style>
+        #map { 
+            width: 100%;
+            height: 900px;
+            box-shadow: 5px 5px 5px #888; 
+        }
+
+      
+
+
+#map-legend {
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        background: white;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        line-height: 1.5em;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        z-index: 1000;
+    }
+
+
+
+
+
+    </style>
+</head>
+<body>
+    
+    <div id="map"></div>
+
+    <div id="map-legend" class="legend">
+        <h4>Simbología</h4>
+        <div><span style="background-color: #84e80d; width: 20px; height: 20px; display: inline-block; border-radius: 50%;"></span> Categoría 1: 99MB BLANCA LEON</div>
+        <div><span style="background-color: #07b124d4; width: 20px; height: 20px; display: inline-block; border-radius: 50%;"></span> Categoría 2: 99minutos</div>
+        <div><span style="background-color: #28ec0a43; width: 20px; height: 20px; display: inline-block; border-radius: 50%;"></span> Categoría 3: 99minutos (freelance)</div>
+        <div><span style="background-color: #cd0aec; width: 20px; height: 20px; display: inline-block; border-radius: 50%;"></span> Categoría 4: CAEY, EDGAR OVANDO HERNANDEZ</div>
+        <div><span style="background-color: #0ae2ec; width: 20px; height: 20px; display: inline-block; border-radius: 50%;"></span> Categoría 5: CRUZ, ERICK EDUARDO CRUZ MARTINEZ</div>
+        <div><span style="background-color: #ecc60a; width: 20px; height: 20px; display: inline-block; border-radius: 50%;"></span> Categoría 6: GA Logistic, ALEJANDRO ARROYO GOMEZ</div>
+        <div><span style="background-color: #08ac89; width: 20px; height: 20px; display: inline-block; border-radius: 50%;"></span> Categoría 7: GREENPACK, OCTAVIO ELIGIO CASAS MORALES</div>
+        <div><span style="background-color: #6d0aec; width: 20px; height: 20px; display: inline-block; border-radius: 50%;"></span> Categoría 8: GUIDO, AURELIO GUIDO GARCIA</div>
+        <div><span style="background-color: #a08c8a; width: 20px; height: 20px; display: inline-block; border-radius: 50%;"></span> Categoría 9: Quality Post</div>
+        <div><span style="background-color: #f58d85; width: 20px; height: 20px; display: inline-block; border-radius: 50%;"></span> Categoría 10: GUTIERREZ, JEUS ALEXIS GUTIERREZ GONZALEZ</div>
+        <div><span style="background-color: #610541; width: 20px; height: 20px; display: inline-block; border-radius: 50%;"></span> Categoría 11: JAMKA, JAVIER ARTURO REYES OLVERA</div>
+        <div><span style="background-color: #e640ac; width: 20px; height: 20px; display: inline-block; border-radius: 50%;"></span> Categoría 12: L-ROS, LESLY RUBI ORDONIEZ SANTANA</div>
+        <div><span style="background-color: #d0a1ec; width: 20px; height: 20px; display: inline-block; border-radius: 50%;"></span> Categoría 13: MAEM, MARCO ANTONIO ESTRADA MORALES</div>
+        <div><span style="background-color: #dce44875; width: 20px; height: 20px; display: inline-block; border-radius: 50%;"></span> Categoría 14: MARQUEZ, RUBEN MARQUEZ AVILA</div>
+        <div><span style="background-color: #f6fd00; width: 20px; height: 20px; display: inline-block; border-radius: 50%;"></span> Categoría 15: RABIT, TRANSPORTES Y MENSAJERIA TORRES S.A DE C.V.</div> 
+        <div><span style="background-color: #f5afb3; width: 20px; height: 20px; display: inline-block; border-radius: 50%;"></span> Categoría 16: RVC, DISTRIBUIDORA RVC DE PUEBLA S.A. DE C.V.</div>
+        <div><span style="background-color: #aff5dc; width: 20px; height: 20px; display: inline-block; border-radius: 50%;"></span> Categoría 17: TERCAM, GRUPO TERCAM SA DE CV</div>
+        <div><span style="background-color: #085bec; width: 20px; height: 20px; display: inline-block; border-radius: 50%;"></span> Categoría 18: TYDSEY, GRUPO TYDSEY S DE RL DE CV</div>
+        <div><span style="background-color: #7cfbea; width: 20px; height: 20px; display: inline-block; border-radius: 50%;"></span> Categoría 19: VMM, Michele Monserrat Vega Malpica'</div>
+        <div><span style="background-color: #ee79f67b; width: 20px; height: 20px; display: inline-block; border-radius: 50%;"></span> Categoría 20: Delivery Pro (Base)</div>
+        <div><span style="background-color: #b58160; width: 20px; height: 20px; display: inline-block; border-radius: 50%;"></span> Categoría 21: Victor Hugo Cornejo Martinez</div>
+        <div><span style="background-color: #f6c206; width: 20px; height: 20px; display: inline-block; border-radius: 50%;"></span> Categoría 22: Yarto</div>
+
+        <div><span style="background-color: black; width: 20px; height: 20px; display: inline-block; border-radius: 50%;"></span> Utiliza el buscador de la izquierda para encontrar tu zona</div>
+        
+    </div>
+
+
+
+    <script>
+    var poligono1 = qp;
+    var poligono2 = greenpack;
+    var poligono3 = maem;
+    var poligono4 = cornejo;
+    var poligono5 = cruz;
+    var poligono6 = yarto;
+    var poligono7 = gutierrez;
+    var poligono8 = tydsey;
+    var poligono9 = min99;
+    var poligono10 = caey;
+    var poligono11 = guido;
+    var poligono12 = marquez;
+    var poligono13 = jamka;
+    var poligono14 = rabit;
+    var poligono15 = tercam;
+    var poligono16 = deliverypro;
+
+        var map = L.map("map").setView([19.466094, -99.1392], 11);
+        L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+            maxZoom: 18
+        }).addTo(map);
+
+        function getColor(proveedor_actual) {
+            switch (proveedor_actual) {
+                case '99MB BLANCA LEON': return '#84e80d';
+                case '99minutos': return '#07b124d4';
+                case '99minutos (freelance)': return '#28ec0a43';
+                case 'CAEY, EDGAR OVANDO HERNANDEZ': return '#cd0aec';
+                case 'CRUZ, ERICK EDUARDO CRUZ MARTINEZ': return '#0ae2ec';
+                case 'GA Logistic, ALEJANDRO ARROYO GOMEZ': return '#ecc60a';
+                case 'GREENPACK, OCTAVIO ELIGIO CASAS MORALES': return '#08ac89';
+                case 'GUIDO, AURELIO GUIDO GARCIA': return '#6d0aec';
+                case 'GUTIERREZ, JEUS ALEXIS GUTIERREZ GONZALEZ': return '#f58d85';
+                case 'JAMKA, JAVIER ARTURO REYES OLVERA': return '#610541';
+                case 'L-ROS, LESLY RUBI ORDONIEZ SANTANA': return '#e640ac';
+                case 'MAEM, MARCO ANTONIO ESTRADA MORALES': return '#d0a1ec';
+                case 'MARQUEZ, RUBEN MARQUEZ AVILA': return '#dce44875';
+                case 'RABIT, TRANSPORTES Y MENSAJERIA TORRES S.A DE C.V.': return '#f6fd00';
+                case 'RVC, DISTRIBUIDORA RVC DE PUEBLA S.A. DE C.V.': return '#f5afb3';
+                case 'TERCAM, GRUPO TERCAM SA DE CV': return '#aff5dc';
+                case 'TYDSEY, GRUPO TYDSEY S DE RL DE CV': return '#085bec';
+                case 'VMM, Michele Monserrat Vega Malpica': return '#7cfbea';
+                case 'QP': return '#a08c8a';
+                default: return '#a08c8a';
+            }
+        }
+
+        function style(feature) {
+            return {
+                fillColor: getColor(feature.properties.proveedor_actual),
+                weight: 1,
+                opacity: 1,
+                color: 'black',
+                dashArray: '2',
+                fillOpacity: 0.5
+            };
+        }
+
+        function onEachFeature(feature, layer) {
+            if (feature.properties) {
+                layer.bindPopup('<p> Código de estación: ' + feature.properties.station_code + '</p><p>Nombre del proveedor: ' + feature.properties.proveedor_actual + '</p><p>Zonificación: ' + feature.properties.zonificacion  + '</p><p>Localidad: ' + feature.properties.locality + '</p>');
+            }
+        }
+
+        var layerGroup = L.geoJSON(actual, {
+            style: style,
+            onEachFeature: onEachFeature
+        });
+
+
+        /////Segunda capa: 
+
+
+
+        function getColor2(proveedor_propuesto) {
+            switch (proveedor_propuesto) {
+                case '99minutos': return '#07b124d4';
+                case 'CAEY, EDGAR OVANDO HERNANDEZ': return '#cd0aec';
+                case 'CRUZ, ERICK EDUARDO CRUZ MARTINEZ': return '#0ae2ec';
+                case 'Delivery Pro (Base)': return '#ee79f67b';
+                case 'GREENPACK, OCTAVIO ELIGIO CASAS MORALES': return '#08ac89';
+                case 'GUIDO, AURELIO GUIDO GARCIA': return '#6d0aec';
+                case 'GUTIERREZ, JEUS ALEXIS GUTIERREZ GONZALEZ': return '#f58d85';
+                case 'JAMKA, JAVIER ARTURO REYES OLVERA': return '#610541';
+                case 'MAEM, MARCO ANTONIO ESTRADA MORALES': return '#d0a1ec';
+                case 'MARQUEZ, RUBEN MARQUEZ AVILA': return '#dce44875';
+                case 'QP': return '#a08c8a';
+                case 'RABIT, TRANSPORTES Y MENSAJERIA TORRES S.A DE C.V.': return '#f6fd00';
+                case 'TERCAM, GRUPO TERCAM SA DE CV': return '#aff5dc';
+                case 'TYDSEY, GRUPO TYDSEY S DE RL DE CV': return '#085bec';
+                case 'Victor Hugo Cornejo Martinez': return '#b58160';
+                case 'Yarto': return '#f6c206';
+                default: return '#a08c8a';
+            }
+        }
+
+        function style2(feature) {
+            return {
+                fillColor: getColor2(feature.properties.proveedor_propuesto),
+                weight: 1,
+                opacity: 1,
+                color: 'black',
+                dashArray: '2',
+                fillOpacity: 0.5
+            };
+        }
+
+        function onEachFeature2(feature, layer) {
+            if (feature.properties) {
+                layer.bindPopup('<p> Código de estación: ' + feature.properties.station_code + '</p><p>Nombre del proveedor: ' + feature.properties.proveedor_propuesto + '</p><p>Zonificación: ' + feature.properties.zonificacion  + '</p><p>Localidad: ' + feature.properties.locality + '</p>');
+            }
+        }
+
+        var layerGroup2 = L.geoJSON(propu, {
+            style: style2,
+            onEachFeature: onEachFeature2
+        });
+
+       ////////////////
+       ////
+    function crearCapaPoligonos(data, fillColor) {
+        return new L.GeoJSON(data, {
+            style: function (feature) {
+                return {
+                    color: fillColor,
+                    weight: 2,
+                    opacity: 1
+                };
+            },
+            onEachFeature: function (feature, layer) {
+                var popupContent = '<h4 style="color:' + feature.properties.color + '">' +
+                                   'Nombre de la capa: ' + feature.properties.station_name + '</h4>' +
+                                   'Zonificacion: ' + feature.properties.zonificacion + '</h4>' + ' ' + 
+                                   'Station Code: ' + feature.properties.station_code;
+                layer.bindPopup(popupContent);
+            }
+        });
+    }
+
+
+    ///añade capas de poligonos
+    var capaPoligonos1 = crearCapaPoligonos(poligono1, "#a08c8a");
+    var capaPoligonos2 = crearCapaPoligonos(poligono2, "#08ac89");
+    var capaPoligonos3 = crearCapaPoligonos(poligono3, "#d0a1ec");
+    var capaPoligonos4 = crearCapaPoligonos(poligono4, "#b58160");
+    var capaPoligonos5 = crearCapaPoligonos(poligono5, "#0ae2ec");
+    var capaPoligonos6 = crearCapaPoligonos(poligono6, "#f6c206");
+    var capaPoligonos7 = crearCapaPoligonos(poligono7, "#f58d85");
+    var capaPoligonos8 = crearCapaPoligonos(poligono8, "#085bec");
+    var capaPoligonos9 = crearCapaPoligonos(poligono9, "#07b124d4");
+    var capaPoligonos10 = crearCapaPoligonos(poligono10, "#cd0aec");
+    var capaPoligonos11 = crearCapaPoligonos(poligono11, "#6d0aec");
+    var capaPoligonos12 = crearCapaPoligonos(poligono12, "#dce44875");
+    var capaPoligonos13 = crearCapaPoligonos(poligono13, "#610541");
+    var capaPoligonos14 = crearCapaPoligonos(poligono14, "#f6fd00");
+    var capaPoligonos15 = crearCapaPoligonos(poligono15, "#aff5dc");
+    var capaPoligonos16 = crearCapaPoligonos(poligono16, "#ee79f67b");
+    /// 
+
+
+
+        ///////////////////
+
+       
+
+        var baseMaps = {
+            "Mapa Base": map
+        };
+
+
+        var overlayMaps = {
+            "Asignación de SP´s actual": layerGroup,
+            "Asignación de SP´s propuesta": layerGroup2,
+            "QP":capaPoligonos1,
+            "Greenpack":capaPoligonos2,
+            "MAEM":capaPoligonos3,
+            "HUGO CORNEJO":capaPoligonos4,
+            "CRUZ":capaPoligonos5,
+            "YARTO":capaPoligonos6,
+            "Gutierrez":capaPoligonos7,
+            "TIDSEY":capaPoligonos8,
+            "99MIN":capaPoligonos9,
+            "CAEY":capaPoligonos10,
+            "GUIDO":capaPoligonos11,
+            "MARQUEZ":capaPoligonos12,
+            "JAMKA":capaPoligonos13,
+            "RABIT":capaPoligonos14,
+            "TERCAM":capaPoligonos15,
+            "Delivery Pro":capaPoligonos16
+           
+        };
+
+        L.control.layers(baseMaps, overlayMaps, {
+            collapsed: false,
+            position: "topleft"
+        }).addTo(map);
+
+        layerGroup.addTo(map);
+
+ // Configurar el control de búsqueda
+ var searchControl = new L.Control.Search({
+        layer: layerGroup,
+        propertyName: 'zonificacion', // Atributo que se usará en el buscador
+        marker: false,
+        text: "Busca un polígono",
+        title: "Haz click para buscar un polígono por su nombre",
+        moveToLocation: function (latlng, title, map) {
+            map.setView(latlng, 12); // Ajustar el nivel de zoom al ubicar la búsqueda
+        }
+        
+    });
+
+    // Eventos de búsqueda
+    searchControl.on('search:locationfound', function (e) {
+        e.layer.setStyle({fillColor: '#0aecdb', color: '#0ae2ec'});
+        if (e.layer._popup) {
+            e.layer.openPopup();
+        }
+    }).on('search:collapsed', function (e) {
+        featuresLayer.eachLayer(function (layer) {
+            featuresLayer.resetStyle(layer);
+        });
+    });
+
+    map.addControl(searchControl); 
+
+    ///Configuración del contrlador de busqueda 2: 
+
+    var searchControl2 = new L.Control.Search({
+        layer: layerGroup2,
+        propertyName: 'zonificacion', // Atributo que se usará en el buscador
+        marker: false,
+        text: "Busca un polígono",
+        title: "Haz click para buscar un polígono por su nombre",
+        moveToLocation: function (latlng, title, map) {
+            map.setView(latlng, 12); // Ajustar el nivel de zoom al ubicar la búsqueda
+        }
+        
+    });
+
+    // Eventos de búsqueda
+    searchControl2.on('search:locationfound', function (e) {
+        e.layer.setStyle({fillColor: '#0aecdb', color: '#0ae2ec'});
+        if (e.layer._popup) {
+            e.layer.openPopup();
+        }
+    }).on('search:collapsed', function (e) {
+        featuresLayer.eachLayer(function (layer) {
+            featuresLayer.resetStyle(layer);
+        });
+    });
+
+    map.addControl(searchControl2);  
+
+
+    /////fin del controlador de búsqueda 2
+
+
+
+
+
+
+    </script>
+</body>
+</html>
